@@ -1,0 +1,20 @@
+apiVersion: v1
+items:
+- apiVersion: certmanager.k8s.io/v1alpha1
+  kind: Certificate
+  metadata:
+    name: rocketchat-tls
+    namespace: default
+    ownerReferences:
+    - apiVersion: extensions/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Ingress
+      name: rocketchat-rocketchat
+  spec:
+    dnsNames:
+    - rocket.serg470.ru
+    issuerRef:
+      kind: Issuer
+      name: gitlab-issuer
+    secretName: rocket-tls
